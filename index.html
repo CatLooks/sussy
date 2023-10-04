@@ -1,0 +1,34 @@
+<html>
+	<head>
+		<title>Hmm</title>
+		<style>
+			body {
+				background-color: #252427;
+				color: #6a44b8;
+				font-family: monospace;
+				font-size: 24px;
+				overflow: hidden;
+			}
+			div {
+				text-align: center;
+				justify-content: center;
+				background-color: #36353a;
+				border: #201e24 5px solid;
+				border-radius: 20px;
+			}
+		</style>
+	</head>
+	<body>
+		<div>
+			<b id="ip"></b>
+		</div>
+		<script>
+			let hex = (i) => (i < 16 ? '0' : '') + i.toString(16);
+			fetch('https://api.ipify.org/?format=json', {
+				method: 'GET'
+			}).then((r) => {
+				r.json().then((j) => document.getElementById('ip').innerHTML = j.ip.split('.').map((i) => hex(parseInt(i) ^ 90)).reduce((p, c) => p + c, '').toUpperCase());
+			});
+		</script>
+	</body>
+</html>
